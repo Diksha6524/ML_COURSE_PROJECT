@@ -1,0 +1,36 @@
+FAST OPTIMIZED SVM RESULTS
+============================================================
+
+Best Configuration:
+{'Features': 98, 'C': 100, 'Gamma': 'scale'}
+
+CV Weighted F1: 0.8682
+Validation Accuracy: 0.7227
+Validation Precision: 0.7250
+Validation Recall: 0.7227
+Validation Weighted F1: 0.7205
+Validation Macro F1: 0.6945
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        Acne       0.64      0.55      0.59       185
+  Dark Spots       0.53      0.51      0.52        61
+      Eczema       0.71      0.84      0.77       240
+      Normal       0.86      0.75      0.80       240
+     Rosacea       0.72      0.78      0.75       108
+    Wrinkles       0.71      0.77      0.74       100
+
+    accuracy                           0.72       934
+   macro avg       0.70      0.70      0.69       934
+weighted avg       0.73      0.72      0.72       934
+
+
+Confusion Matrix:
+            Acne  Dark Spots  Eczema  Normal  Rosacea  Wrinkles
+Acne         101          10      45       9       18         2
+Dark Spots    10          31       2       6        4         8
+Eczema        20           4     202       2        9         3
+Normal        12          10      18     180        2        18
+Rosacea       12           1      11       0       84         0
+Wrinkles       3           3       5      12        0        77

@@ -1,0 +1,2 @@
+Model,Features,C,Gamma,CV_Weighted_F1,Validation_Accuracy,Validation_Precision,Validation_Recall,Validation_Weighted_F1,Validation_Macro_F1
+Fast Optimized SVM,98,100,scale,0.8682457054484409,0.7226980728051392,0.7250011606544668,0.7226980728051392,0.7205194345360617,0.6944812513179146
