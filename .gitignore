@@ -12,12 +12,17 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# VS Code
+# IDE & Tooling
 .vscode/
+.agents/
+.claude/
+.gradio/
+ML_COURSE_PROJECT/
 
-# Temporary files
+# Temporary files & logs
 *.tmp
 *.log
+server.log
 
 # OS files
 .DS_Store
