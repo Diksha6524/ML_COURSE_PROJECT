@@ -302,11 +302,37 @@ def extract_color_ratio_features(image):
 # EXTRACT FEATURES FROM ONE IMAGE
 # ============================================================
 
-def extract_features(image_path):
+def extract_features(image_input):
 
-    image = cv2.imread(image_path)
+    if isinstance(image_input, np.ndarray):
+        image = image_input.copy()
+    elif isinstance(image_input, str):
+        if os.path.exists(image_input):
+            image = cv2.imread(image_input)
+        else:
+            return None
+    elif hasattr(image_input, "path") and isinstance(image_input.path, str) and os.path.exists(image_input.path):
+        image = cv2.imread(image_input.path)
+    elif hasattr(image_input, "name") and isinstance(image_input.name, str) and os.path.exists(image_input.name):
+        image = cv2.imread(image_input.name)
+    elif isinstance(image_input, dict):
+        if "composite" in image_input and isinstance(image_input["composite"], np.ndarray):
+            arr = image_input["composite"]
+            if len(arr.shape) == 3 and arr.shape[2] == 4:
+                arr = cv2.cvtColor(arr, cv2.COLOR_RGBA2BGR)
+            elif len(arr.shape) == 3 and arr.shape[2] == 3:
+                arr = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
+            image = arr
+        elif "path" in image_input and isinstance(image_input["path"], str) and os.path.exists(image_input["path"]):
+            image = cv2.imread(image_input["path"])
+        elif "array" in image_input and isinstance(image_input["array"], np.ndarray):
+            image = image_input["array"]
+        else:
+            return None
+    else:
+        return None
 
-    if image is None:
+    if image is None or not isinstance(image, np.ndarray) or image.size == 0:
         return None
 
     # Resize
