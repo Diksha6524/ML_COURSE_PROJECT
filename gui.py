@@ -40,30 +40,8 @@ def classify_skin_image(image):
         return "Error: Model or feature dataset missing.", {}
     
     try:
-        # Convert image input to BGR numpy array
-        if isinstance(image, str):
-            bgr_image = cv2.imread(image)
-        elif isinstance(image, np.ndarray):
-            if len(image.shape) == 3 and image.shape[2] == 4:
-                bgr_image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
-            elif len(image.shape) == 3 and image.shape[2] == 3:
-                bgr_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-            else:
-                bgr_image = image
-        elif isinstance(image, dict):
-            if "composite" in image:
-                img_arr = image["composite"]
-                if len(img_arr.shape) == 3 and img_arr.shape[2] == 4:
-                    bgr_image = cv2.cvtColor(img_arr, cv2.COLOR_RGBA2BGR)
-                else:
-                    bgr_image = cv2.cvtColor(img_arr, cv2.COLOR_RGB2BGR)
-            elif "background" in image and image["background"] is not None:
-                img_arr = image["background"]
-                bgr_image = cv2.cvtColor(img_arr, cv2.COLOR_RGB2BGR)
-            else:
-                bgr_image = image
-        else:
-            bgr_image = image
+        # Convert RGB image (from Gradio) to BGR for OpenCV feature extraction
+        bgr_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         
         # Extract 98 features
         raw_features = feature_extractor.extract_features(bgr_image)
