@@ -302,9 +302,14 @@ def extract_color_ratio_features(image):
 # EXTRACT FEATURES FROM ONE IMAGE
 # ============================================================
 
-def extract_features(image_path):
+def extract_features(image_input):
 
-    image = cv2.imread(image_path)
+    if isinstance(image_input, np.ndarray):
+        image = image_input
+    elif isinstance(image_input, (str, os.PathLike)):
+        image = cv2.imread(str(image_input))
+    else:
+        return None
 
     if image is None:
         return None

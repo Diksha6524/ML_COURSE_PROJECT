@@ -41,7 +41,12 @@ def classify_skin_image(image):
     
     try:
         # Convert RGB image (from Gradio) to BGR for OpenCV feature extraction
-        bgr_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        if len(image.shape) == 2:
+            bgr_image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+        elif image.shape[2] == 4:
+            bgr_image = cv2.cvtColor(image, cv2.COLOR_RGBA2BGR)
+        else:
+            bgr_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         
         # Extract 98 features
         raw_features = feature_extractor.extract_features(bgr_image)
