@@ -1,4 +1,4 @@
-to show the output:
+output:
 .venv/bin/python evaluate.py
 
 acc, f1 score
